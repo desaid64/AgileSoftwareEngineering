@@ -10,6 +10,7 @@ import {
 import NavigationBar from './NavigationBar';
 import Greetings from './Greetings';
 import SignupPage from './signup/SignupPage';
+import FlashMessageList from './flash/FlashMessageList';
 
 class App extends React.Component{
     render(){
@@ -18,6 +19,7 @@ class App extends React.Component{
                 <Router>
                     <div>
                         <NavigationBar/>
+                        <FlashMessageList />
                         <Switch>
                             <Route path="/" component={Greetings} exact />
                             <Route path="/signup" component={SignupPage} />

@@ -14,7 +14,12 @@
     * npm install --save-dev -g webpack 
     * npm install --save-dev webpack-dev-middleware
     * npm install --save lodash
-
+    * npm install --save axios
+    * npm install --save react-redux redux redux-thunk
+    * npm install --save prop-types
+    * npm install --save body-parser validator
+    * npm install --save classnames
+    * npm install --save shortid
 4. Compile and Run Local Server
     Run script in AgileSoftwareEngineering Folder:
     npm start
