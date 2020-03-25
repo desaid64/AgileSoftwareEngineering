@@ -18,7 +18,8 @@ class SignupForm extends React.Component {
             timezone: '',
             errors: {},
             isLoading: false,
-            redirect: false
+            redirect: false,
+            invalid: false,
         }
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -136,7 +137,7 @@ class SignupForm extends React.Component {
               <span className = "help-block">{this.state.errors.timezone}</span>}
               </div>
               <div className="form-group">
-                <button type="submit" disabled={this.state.isLoading} className ="btn btn-primary btn-lg">
+                <button type="submit" disabled={this.state.isLoading || this.state.invalid} className ="btn btn-primary btn-lg">
                   Sign Up
                 </button>
               </div>
