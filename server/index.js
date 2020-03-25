@@ -7,7 +7,7 @@ import webpackMiddleware from 'webpack-dev-middleware';
 import webpackConfig from '../webpack.config.dev';
 
 import users from './routes/users';
-const config = require('./config/config.js');
+const config = require('./config/hidden/config.js');
 
 let app = express();
 app.use(bodyParser.json());
