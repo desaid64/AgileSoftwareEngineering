@@ -20,6 +20,8 @@
     * npm install --save body-parser validator
     * npm install --save classnames
     * npm install --save shortid
+    * npm install --save mysql
+
 4. Compile and Run Local Server
     Run script in AgileSoftwareEngineering Folder:
     npm start

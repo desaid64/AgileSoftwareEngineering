@@ -22,6 +22,7 @@ class SignupForm extends React.Component {
         }
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.checkUserExists = this.checkUserExists.bind(this);
     }
     onChange(e){
         this.setState({[e.target.name]:e.target.value});
@@ -33,6 +34,27 @@ class SignupForm extends React.Component {
       }
       return isValid;
     }
+
+    checkUserExists(e) {
+      const field = e.target.name;
+      const val = e.target.value;
+      if (val !== '') {
+        this.props.isUserExists(val).then(res => {
+          let errors = this.state.errors;
+          let invalid;
+          if (res.data) {
+            errors[field] = field + "already exists";
+            invalid = true;
+          } else {
+            errors[field] = '';
+            invalid = false;
+          }
+          this.setState({ errors, invalid });
+        });
+        console.log("checkUserExists end");
+      }
+    }
+
     onSubmit(e){
         e.preventDefault();
         if(this.isValid()) {
@@ -99,7 +121,7 @@ class SignupForm extends React.Component {
               type="password"
             />
               
-            <div className={classnames("form-group",{ 'has-error' :this.state.errors.username})}>
+            <div className={classnames("form-group",{ 'has-error' : this.state.errors.timezone})}>
               <label className="control-label">Timezone</label>
               <select 
                 value={this.state.timezone}
@@ -126,7 +148,8 @@ class SignupForm extends React.Component {
 
 SignupForm.propTypes = {
   userSignupRequest: PropTypes.func.isRequired,
-  addFlashMessage: PropTypes.func.isRequired
+  addFlashMessage: PropTypes.func.isRequired,
+  isUserExists: PropTypes.func.isRequired
 }
 
 
