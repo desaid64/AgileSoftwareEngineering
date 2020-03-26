@@ -7,11 +7,13 @@ import webpackMiddleware from 'webpack-dev-middleware';
 import webpackConfig from '../webpack.config.dev';
 
 import users from './routes/users';
+import auth from './routes/auth';
 const config = require('./config/hidden/config.js');
 
 let app = express();
 app.use(bodyParser.json());
 app.use('/api/users',users);
+app.use('/api/auth',auth);
 
 const compiler = webpack(webpackConfig);
 app.use(webpackMiddleware(compiler));

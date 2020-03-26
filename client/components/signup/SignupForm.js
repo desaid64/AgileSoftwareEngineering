@@ -44,7 +44,7 @@ class SignupForm extends React.Component {
           let errors = this.state.errors;
           let invalid;
           if (res.data) {
-            errors[field] = field + " already exists";
+            errors[field] = field + "already exists";
             invalid = true;
           } else {
             errors[field] = '';
@@ -52,7 +52,6 @@ class SignupForm extends React.Component {
           }
           this.setState({ errors, invalid });
         });
-
       }
     }
 

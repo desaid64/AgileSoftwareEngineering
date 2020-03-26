@@ -21,6 +21,7 @@
     * npm install --save classnames
     * npm install --save shortid
     * npm install --save mysql
+    * npm install --save jsonwebtoken
 
 4. Compile and Run Local Server
     Run script in AgileSoftwareEngineering Folder:
