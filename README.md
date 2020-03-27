@@ -1,3 +1,18 @@
+
+## Steps to Run: 
+
+* cd AgileSoftwareEngineering
+* cd client
+* npm install
+* cd ../server
+* npm install
+* npm start
+
+
+
+# More Info: 
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
