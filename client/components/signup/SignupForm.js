@@ -76,7 +76,7 @@ class SignupForm extends React.Component {
     }
     render() {
         if(this.state.redirect){
-          console.info(this.state.redirect);
+          //console.info(this.state.redirect);
           return <Redirect to='/'/>;
         }
         const options = map(timezones,(val,key) =>

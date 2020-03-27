@@ -3,7 +3,7 @@ import TextFieldGroup from "../common/TextFieldGroup";
 import validateInput from '../../../server/shared/validations/login';
 import { Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
-import {login} from '../../actions/login';
+import {login} from '../../actions/authActions';
 import PropTypes from 'prop-types';
 
 class LoginForm extends React.Component {
@@ -48,7 +48,7 @@ class LoginForm extends React.Component {
 
     render() {
         if(this.state.redirect){
-            console.info(this.state.redirect);
+            //console.info(this.state.redirect);
             return <Redirect to='/'/>;
         }
         return (
