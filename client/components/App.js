@@ -13,6 +13,7 @@ import SignupPage from './signup/SignupPage';
 import LoginPage from './login/LoginPage';
 import FlashMessageList from './flash/FlashMessageList';
 import NewEventPage from './events/NewEventPage';
+import requireAuth from '../utils/requireAuth';
 class App extends React.Component{
     render(){
         return(
@@ -25,7 +26,7 @@ class App extends React.Component{
                             <Route path="/" component={Greetings} exact />
                             <Route path="/signup" component={SignupPage} />
                             <Route path="/login" component={LoginPage} />
-                            <Route path ="/new-event" component={NewEventPage} />
+                            <Route path ="/new-event" component={requireAuth(NewEventPage)} />
                         </Switch>
                     </div>
                 </Router>
