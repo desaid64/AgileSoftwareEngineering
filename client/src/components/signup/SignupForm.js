@@ -4,7 +4,7 @@ import map from 'lodash/map';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import TextFieldGroup from "../common/TextFieldGroup";
-import validateInput from '../../../server/shared/validations/signup';
+import validateInput from  "../../validations/signup";
 import { Redirect } from 'react-router-dom';
 
 class SignupForm extends React.Component {

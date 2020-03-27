@@ -42,7 +42,7 @@ class EventForm extends React.Component {
           error={errors.title}
         />
 
-        <button type="submit" className="btn btn-primary">Create</button>
+        <button type="submit" disabled={isLoading} className="btn btn-primary">Create</button>
       </form>
     );
   }

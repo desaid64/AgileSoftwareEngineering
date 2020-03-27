@@ -1,6 +1,6 @@
 import React from 'react';
 import TextFieldGroup from "../common/TextFieldGroup";
-import validateInput from '../../../server/shared/validations/login';
+import validateInput from '../../validations/login';
 import { Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
 import {login} from '../../actions/authActions';

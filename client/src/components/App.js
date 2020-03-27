@@ -2,9 +2,7 @@ import React from 'react';
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
-    useParams,
-    useRouteMatch
+    Route
   } from "react-router-dom";
 
 import NavigationBar from './NavigationBar';

@@ -3,25 +3,25 @@ import isEmpty from 'lodash/isEmpty';
 
 export default function validateInput(data) {
     let errors = {};
-    if(data.username == ""){
+    if(data.username === ""){
         errors.username = 'This field is required';
     }
-    if(data.email=="") {
+    if(data.email==="") {
         errors.email = 'This field is required';
     }
     if(!Validator.isEmail(data.email)){
         errors.email = 'Email is invalid';
     }
-    if(data.password=="") {
+    if(data.password==="") {
         errors.password = 'This field is required';
     }
-    if(data.passwordConfirmation=="") {
+    if(data.passwordConfirmation==="") {
         errors.passwordConfirmation = 'This field is required';
     }
     if(!Validator.equals(data.password,data.passwordConfirmation)) {
         errors.passwordConfirmation = 'Passwords must match';
     }
-    if(data.timezone=="") {
+    if(data.timezone==="") {
         errors.timezone = 'This field is required';
     }
 

@@ -1,5 +1,5 @@
 import express from 'express';
-import commonValidation from '../shared/validations/signup';
+import commonValidation from '../validations/signup';
 import bcrypt from 'bcrypt'; 
 import isEmpty from 'lodash/isEmpty';
 let router = express.Router();
