@@ -5,7 +5,7 @@ var connection = mysql.createConnection({
     host: config.db.host,
     user: config.db.user,
     password:config.db.password,
-    database: "HotelManagement",
+    database: "HotelManagement_Team_2",
     insecureAuth: true,
     multipleStatements:true
 })
