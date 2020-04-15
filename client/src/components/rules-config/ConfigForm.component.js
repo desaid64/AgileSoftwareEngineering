@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react'
 import moment from 'moment'
 import PropTypes from 'prop-types'
-import axios from 'axios'
+//import axios from 'axios'
 
 import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button'
 import FilledInput from '@material-ui/core/FilledInput'
 
 import defaultRules from '../../data/default-rules'
-import timezones from '../../data/timezones'
+//import timezones from '../../data/timezones'
 import useStyles from './CofigForm.styles'
 
 const cookies = {

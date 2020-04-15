@@ -1,5 +1,5 @@
 import React from 'react'
-import moment from 'moment';
+//import moment from 'moment';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 
 import ConfigForm from './ConfigForm.component'

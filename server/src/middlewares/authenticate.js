@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken';
 import config from '../config/hidden/config';
-import db from '../config/db';
 
 export default (req, res, next) => {
   const authorizationHeader = req.headers['authorization'];

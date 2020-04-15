@@ -1,6 +1,6 @@
-drop schema HotelManagement;
-create schema if not exists HotelManagement;
-use HotelManagement;
+drop schema HotelManagement_Team_2;
+create schema if not exists HotelManagement_Team_2;
+use HotelManagement_Team_2;
 CREATE TABLE IF NOT EXISTS Departments(
   DepartmentID int primary key,
   DepartmentName varchar(50) not null,
@@ -49,7 +49,7 @@ create table IF NOT EXISTS Languages(
   ModifiedBy int
 );
 create table IF NOT EXISTS Employees(
-  EmployeeID int primary key,
+  EmployeeID int primary key AUTO_INCREMENT,
   Username varchar(15) not null,
   Passwd char(64)
   /*assuming SHA-256*/,
@@ -133,9 +133,7 @@ create table IF NOT EXISTS DepartmentMapping(
   primary key(MasterDepartment, ChildDepartment),
   constraint FK_MasterDepartment foreign key (MasterDepartment) references EmployeeJobCodes(JobCode)
 );
-create table IF NOT EXISTS users(
-  id int(10) unsigned NOT NULL AUTO_INCREMENT primary key,
-  username varchar(50) not null unique,
-  email varchar(50) not null unique,
-  `password` varchar(255) not null
-);
+
+INSERT INTO `HotelManagement_Team_2`.`Languages` (`LanguageCode`, `Language_`) VALUES ('1', 'English');
+INSERT INTO `HotelManagement_Team_2`.`Languages` (`LanguageCode`, `Language_`) VALUES ('2', 'Spanish');
+INSERT INTO `HotelManagement_Team_2`.`Languages` (`LanguageCode`, `Language_`) VALUES ('3', 'Chinese');

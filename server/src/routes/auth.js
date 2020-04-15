@@ -7,14 +7,16 @@ var db = require ("../config/db.js");
 
 router.post('/', (req, res) => {
     const { identifier, password } = req.body;
-    var sql = 'select * from users where username = ? or email = ?';
+    var sql = 'select * from Employees where Username = ? or PreferredEmail = ?';
     db.query(sql,[identifier,identifier],(err, rows, fields)=>{
         if (err) throw err;
-        if(rows[0].password){
-            if(bcrypt.compareSync(password,rows[0].password)){
+        console.log("auth.js")
+        console.log(rows[0])
+        if(rows[0].Passwd){
+            if(bcrypt.compareSync(password,rows[0].Passwd)){
                 const token = jwt.sign({
-                    id: rows[0].id,
-                    username: rows[0].username
+                    id: rows[0].EmployeeID,
+                    username: rows[0].Username
                   }, config.jwtSecret);
                   res.json({ token });
             }  else {
