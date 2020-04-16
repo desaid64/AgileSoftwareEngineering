@@ -12,14 +12,7 @@ class NavigationBar extends React.Component {
 
   render() {
     const { isAuthenticated } = this.props.auth;
-    const isAdmin = this.props.auth.user.isAdmin;
-  
-    const adminLinks = (
-      <ul className="nav navbar-nav navbar-right">
-        <li><Link to="#" onClick={this.logout.bind(this)}>Logout</Link></li>
-      </ul>
-    )
- 
+    
     const userLinks = (
       <ul className="nav navbar-nav navbar-right">
         <li><Link to={`config`} >Rules Config</Link></li>
@@ -41,8 +34,8 @@ class NavigationBar extends React.Component {
             <Link className="navbar-brand" to="/">Shift Management</Link>
           </div>
           <div className="collapse navbar-collapse">
-            {!isAuthenticated ? guestLinks : (isAdmin ? adminLinks : userLinks)}
-          </div>
+            {isAuthenticated ? userLinks :guestLinks}
+          </div> 
         </div>
       </nav>
     );
