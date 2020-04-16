@@ -64,8 +64,11 @@ create table IF NOT EXISTS Employees(
   Created datetime,
   CreatedBy int,
   ModifiedBy int,
+  DepartmentID int,
+  isAdmin int,
   constraint FK_Method foreign key (CurrentContactMethod) references ContactMethods(MethodID),
-  constraint FK_Language foreign key (PreferredLanguageID) references Languages(LanguageCode)
+  constraint FK_Language foreign key (PreferredLanguageID) references Languages(LanguageCode),
+  constraint FK_Department_ID foreign key (DepartmentID) references Departments(DepartmentID)
 );
 create table IF NOT EXISTS Shifts(
   ShiftID int,
@@ -133,7 +136,9 @@ create table IF NOT EXISTS DepartmentMapping(
   primary key(MasterDepartment, ChildDepartment),
   constraint FK_MasterDepartment foreign key (MasterDepartment) references EmployeeJobCodes(JobCode)
 );
-
+use HotelManagement_Team_2;
 INSERT INTO `HotelManagement_Team_2`.`Languages` (`LanguageCode`, `Language_`) VALUES ('1', 'English');
 INSERT INTO `HotelManagement_Team_2`.`Languages` (`LanguageCode`, `Language_`) VALUES ('2', 'Spanish');
 INSERT INTO `HotelManagement_Team_2`.`Languages` (`LanguageCode`, `Language_`) VALUES ('3', 'Chinese');
+INSERT INTO `HotelManagement_Team_2`.`Departments` (`DepartmentID`, `DepartmentName`, `PrimaryMgrContact`) VALUES ('2', 'ShiftManager', '1');
+INSERT INTO `HotelManagement_Team_2`.`Departments` (`DepartmentID`, `DepartmentName`, `PrimaryMgrContact`) VALUES ('1', 'Employee', '2');

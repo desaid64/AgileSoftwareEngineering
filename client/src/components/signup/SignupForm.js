@@ -37,8 +37,6 @@ class SignupForm extends React.Component {
 
     isValid() {
       const {errors, isValid } = validateInput(this.state);
-      console.log(errors);
-      console.log(isValid);
       if(!isValid){
         this.setState({errors});
       }
@@ -86,7 +84,7 @@ class SignupForm extends React.Component {
     render() {
         if(this.state.redirect){
           //console.info(this.state.redirect);
-          return <Redirect to='/'/>;
+          return <Redirect to='/homepage'/>;
         }
         const timeZoneOptions = map(timezones,(val,key) =>
             <option key ={val} value={val}>{key}</option>

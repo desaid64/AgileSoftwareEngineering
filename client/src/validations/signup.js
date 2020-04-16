@@ -28,7 +28,6 @@ export default function validateInput(data) {
         errors.phoneNumber = 'This field is required';
     } else {
         const regex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-        console.log(regex.test(data.phoneNumber))
         if(!regex.test(data.phoneNumber) ) {
             errors.phoneNumber = 'Invalid Phone Number';
         }

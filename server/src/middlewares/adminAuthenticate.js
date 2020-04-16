@@ -13,10 +13,14 @@ export default (req, res, next) => {
       if (err) {
         res.status(401).json({ error: 'Failed to authenticate' });
       } else {
-          console.log(decoded);
-          req.id = decoded.id;
-          req.deptId = decoded.deptId;
-          next();
+          if(decoded.isAdmin){
+            req.id = decoded.id;
+            req.deptId = decoded.deptId;
+            next();
+          } else {
+              res.status(401).json({ error: 'Failed to authenticate' });
+          }
+
       }
     });
   } else {
