@@ -31,11 +31,11 @@ class App extends React.Component {
               <Route path="/" component={Greetings} exact />
               <Route path="/signup" component={SignupPage} />
               <Route path="/login" component={LoginPage} />
-              {isAdmin ? 
-                  <Route path="/homepage" component={requireAuth(adminHomepage)} />
+              {isAdmin ?
+                <Route path="/homepage" component={requireAuth(adminHomepage)} />
                 : <Route path="/homepage" component={requireAuth(userHomepage)} />
               }
-              <Route path="/config/:dept_id" component={requireAuth(RulesConfigPage)} exact />
+              <Route path="/rulesconfig" component={requireAuth(RulesConfigPage)} exact />
               <Route path="/new-event" component={requireAuth(NewEventPage)} />
             </Switch>
           </div>
@@ -53,5 +53,5 @@ function mapStateToProps(state) {
     auth: state.auth
   };
 }
-export default connect(mapStateToProps,{})(App);
+export default connect(mapStateToProps, {})(App);
 //export default App;
