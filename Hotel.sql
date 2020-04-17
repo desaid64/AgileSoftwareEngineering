@@ -136,9 +136,25 @@ create table IF NOT EXISTS DepartmentMapping(
   primary key(MasterDepartment, ChildDepartment),
   constraint FK_MasterDepartment foreign key (MasterDepartment) references EmployeeJobCodes(JobCode)
 );
+create table IF NOT EXISTS ShiftManagerRules(
+  DepartmentID int,
+  AvailableShiftResponseDeadline int,
+  TimePeriodAllowedForCallOuts int,
+  ConfirmCalloutTimePeriod int,
+  ResolveNoMgrAdvertise varchar(25),
+  CopyDeptMgrOnEmails char(3),
+  SystemEmailAddress varchar(25),
+  SystemTimeZone varchar(25),
+  NotifyMgrOfShiftResults char(3),
+  ShiftManagerComunicationMethod varchar (25),
+  NotifyMgrBeforeAdvertising char(3),
+  MinutesToWaitForMgrToAdvertise int,
+  MinutesToWaitForMgrFinalDecision int,
+  ResolveNoMgrFinalDecision varchar (25),
+  constraint FK_DepartmentIDForRules foreign key (DeparmtentID) references Departments(DeparmtentID)
+);
+
 use HotelManagement_Team_2;
 INSERT INTO `HotelManagement_Team_2`.`Languages` (`LanguageCode`, `Language_`) VALUES ('1', 'English');
 INSERT INTO `HotelManagement_Team_2`.`Languages` (`LanguageCode`, `Language_`) VALUES ('2', 'Spanish');
 INSERT INTO `HotelManagement_Team_2`.`Languages` (`LanguageCode`, `Language_`) VALUES ('3', 'Chinese');
-INSERT INTO `HotelManagement_Team_2`.`Departments` (`DepartmentID`, `DepartmentName`, `PrimaryMgrContact`) VALUES ('2', 'ShiftManager', '1');
-INSERT INTO `HotelManagement_Team_2`.`Departments` (`DepartmentID`, `DepartmentName`, `PrimaryMgrContact`) VALUES ('1', 'Employee', '2');

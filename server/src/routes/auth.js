@@ -10,16 +10,20 @@ router.post('/', (req, res) => {
     var sql = 'select * from Employees where Username = ? or PreferredEmail = ?';
     db.query(sql,[identifier,identifier],(err, rows, fields)=>{
         if (err) throw err;
-        if(rows[0].Passwd){
-            if(bcrypt.compareSync(password,rows[0].Passwd)){
-                const token = jwt.sign({
-                    id: rows[0].EmployeeID,
-                    username: rows[0].Username,
-                    deptId : rows[0].DepartmentID,
-                    isAdmin : rows[0].isAdmin
-                  }, config.jwtSecret);
-                  res.json({ token });
-            }  else {
+        if(rows.length > 0){
+            if(rows[0].Passwd){
+                if(bcrypt.compareSync(password,rows[0].Passwd)){
+                    const token = jwt.sign({
+                        id: rows[0].EmployeeID,
+                        username: rows[0].Username,
+                        deptId : rows[0].DepartmentID,
+                        isAdmin : rows[0].isAdmin
+                    }, config.jwtSecret);
+                    res.json({ token });
+                }  else {
+                res.status(401).json({ errors: { form: 'Invalid Credentials' } });
+                }
+            } else {
                 res.status(401).json({ errors: { form: 'Invalid Credentials' } });
             }
         } else {
