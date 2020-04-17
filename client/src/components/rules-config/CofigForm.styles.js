@@ -7,7 +7,7 @@ export default makeStyles({
   },
   form: {
     display: "grid",
-    gridTemplateColumns: "1fr 1fr",
+    gridTemplateColumns: "1fr",
     gridColumnGap: "30px",
     gridRowGap: "20px",
     width: "100%",
@@ -22,8 +22,9 @@ export default makeStyles({
     width: "auto"
   },
   submitButton: {
+    marginTop: '25px',
     width: "100px",
-    justifySelf: "start"
+    justifySelf: "end"
   },
   group: {
     justifyContent: "space-between"

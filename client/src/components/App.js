@@ -30,7 +30,7 @@ class App extends React.Component {
               <Route path="/signup" component={SignupPage} />
               <Route path="/login" component={LoginPage} />
               <Route path="/homepage" component={requireAuth(homepage)} />
-              <Route path="/config/:dept_id" component={requireAuth(RulesConfigPage)} exact />
+              <Route path="/rulesconfig" component={requireAuth(RulesConfigPage)} exact />
               <Route path="/new-event" component={requireAuth(NewEventPage)} />
             </Switch>
           </div>
