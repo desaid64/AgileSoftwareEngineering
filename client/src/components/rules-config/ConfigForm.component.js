@@ -81,7 +81,7 @@ const ConfigForm = ({ department, isAdmin }) => {
 
   const handleOnChange = (setting, value) => {
     switch (setting) {
-      case 'ShiftManagermunicationMethod':
+      case 'ShiftManagerComunicationMethod':
       case 'NotifyMgrBeforeAdvertising':
       case 'ResolveNoMgrAdvertise':
       case 'ResolveNoMgrFinalDecision':
@@ -99,7 +99,7 @@ const ConfigForm = ({ department, isAdmin }) => {
           setState(prevState => (value === '' ? { ...prevState, [setting]: SETTINGS.INTERVAL_MIN } : { ...prevState, [setting]: value }))
         }
         break
-      case 'TimePeriodAllowedForCallouts':
+      case 'TimePeriodAllowedForCallOuts':
         if (validateDay(value)) {
           setState(prevState => (value === '' ? { ...prevState, [setting]: SETTINGS.DAY_MIN } : { ...prevState, [setting]: value }))
         }
