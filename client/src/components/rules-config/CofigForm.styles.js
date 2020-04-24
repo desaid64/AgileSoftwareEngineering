@@ -3,14 +3,13 @@ import { makeStyles } from '@material-ui/core/styles'
 export default makeStyles({
   root: {
     display: "grid",
-    justifyItems: "center"
+    placeItems: "center",
+    height: '80vh'
   },
   form: {
     display: "grid",
     gridTemplateColumns: "1fr",
-    gridColumnGap: "30px",
-    gridRowGap: "20px",
-    width: "100%",
+    // gridColumnGap: "30px",
     justifyContent: "center",
     boxSizing: "border-box"
   },
@@ -22,11 +21,17 @@ export default makeStyles({
     width: "auto"
   },
   submitButton: {
-    marginTop: '25px',
+    marginTop: '12px',
     width: "100px",
-    justifySelf: "end"
+    float: "right",
   },
   group: {
     justifyContent: "space-between"
+  },
+  loading: {
+    display: 'block'
+  },
+  divider: {
+    margin: "12px auto"
   }
 })

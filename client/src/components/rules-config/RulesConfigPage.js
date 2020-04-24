@@ -17,7 +17,7 @@ import { useEffect } from 'react';
 
 const theme = createMuiTheme({
   typography: {
-    fontSize: 22,
+    fontSize: 24,
   }
 })
 
@@ -36,20 +36,20 @@ const RulesConfigPage = (user) => {
   // using hard coded until api route is updated
   const classes = useStyles()
   const [selectedDept, setSelectedDept] = useState(user.deptId)
-  const [departments, setDepartments] = useState(() => {
-
-  })
+  const [departments, setDepartments] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    if (!user.isAdmin) return
     axios.get('/api/departments')
       .then(response => {
         setDepartments(response.data)
+        setIsLoading(false)
       })
       .catch(error => {
+        setIsLoading(true)
         console.log(error);
       })
-  }, [user.isAdmin])
+  }, [])
 
   return (
     <ThemeProvider theme={theme}>
@@ -62,10 +62,9 @@ const RulesConfigPage = (user) => {
                   MenuProps={{ variant: 'menu', PaperProps: { style: { height: '50vh' } } }}
                   className={classes.select}
                   variant="outlined"
-                  value={selectedDept}
+                  value={`${selectedDept}`}
                   onChange={e => setSelectedDept(e.target.value)}
-                >
-                  {departments ?
+                >{
                     departments.map(department =>
                       <MenuItem
                         key={department.DepartmentID}
@@ -73,12 +72,11 @@ const RulesConfigPage = (user) => {
                       >
                         {department.DepartmentName}
                       </MenuItem>)
-                    : false
                   }
                 </Select>
               </FormControl>
               :
-              <h1>{user.deptName}</h1>
+              <h1>{isLoading ? false : departments[0].DepartmentName}</h1>
           }
         </Box>
         <ConfigForm department={selectedDept} isAdmin={user.isAdmin} />

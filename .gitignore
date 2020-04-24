@@ -3,3 +3,6 @@ client/node_modules
 server/.DS_Store
 server/node_modules
 server/src/config/hidden
+Dockerfile*
+*docker*
+.env
