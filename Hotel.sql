@@ -158,3 +158,49 @@ use HotelManagement_Team_2;
 INSERT INTO `HotelManagement_Team_2`.`Languages` (`LanguageCode`, `Language_`) VALUES ('1', 'English');
 INSERT INTO `HotelManagement_Team_2`.`Languages` (`LanguageCode`, `Language_`) VALUES ('2', 'Spanish');
 INSERT INTO `HotelManagement_Team_2`.`Languages` (`LanguageCode`, `Language_`) VALUES ('3', 'Chinese');
+
+
+
+DELIMITER $$
+CREATE PROCEDURE  checkUserExists(
+	IN identifier varchar(25) 
+)
+BEGIN
+	select * from Employees where Username = identifier or PreferredEmail = identifier;
+END $$
+DELIMITER 
+
+
+DELIMITER $$
+CREATE PROCEDURE  checkUserExistsAndReturnIdentifiers(
+	IN identifier varchar(25) 
+)
+BEGIN
+	select Username,PreferredEmail from Employees where Username = identifier or PreferredEmail = identifier;
+END $$
+DELIMITER 
+
+
+DELIMITER $$
+CREATE PROCEDURE  InsertAndReturnUser(
+	IN username varchar(15),
+    IN password_digest char(64),
+    IN email varchar(25),
+    IN phoneNumber varchar(10),
+    IN languageID int(11),
+    IN firstName varchar(15),
+    IN lastName varchar(15),
+    IN departmentID int(11)
+)
+BEGIN
+	DECLARE isAdmin int(11) DEFAULT 0;
+	IF departmentID = 999999 THEN
+        SET isAdmin = 1;
+	ELSE
+		SET isAdmin = 0;
+    END IF;
+	INSERT INTO Employees (Username,Passwd,PreferredEmail,PhoneNumber,PreferredLanguageID,FirstName,LastName,DepartmentID,isAdmin) VALUES 
+    (username,password_digest,email,phoneNumber,languageID,firstName,lastName,departmentID,isAdmin);
+    SELECT EmployeeId,Username,PreferredEmail,DepartmentID,isAdmin from Employees where EmployeeID = (SELECT last_insert_id());
+END $$
+DELIMITER 

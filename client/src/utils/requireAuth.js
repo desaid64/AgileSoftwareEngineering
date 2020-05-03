@@ -30,7 +30,6 @@ export default function(ComposedComponent) {
 
     render() {
         if(this.state.redirect){
-            //console.info(this.state.redirect);
             return <Redirect to={this.state.redirectValue} />;
           }
         return (
