@@ -6,6 +6,7 @@ import auth from './routes/auth';
 import events from './routes/events';
 import departments from './routes/departments';
 import rulesconfig from './routes/rulesconfig';
+import callouts from './routes/callout';
 
 const config = require('./config/hidden/config.js');
 
@@ -16,6 +17,7 @@ app.use('/api/auth', auth);
 app.use('/api/events', events);
 app.use('/api/departments', departments);
 app.use('/api/rulesconfig', rulesconfig);
+app.use('/api/callouts', callouts);
 
 
 //database connection
