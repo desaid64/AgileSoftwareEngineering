@@ -60,15 +60,13 @@ const ConfigForm = ({ department, isAdmin }) => {
   })
 
   useEffect(() => {
-    console.log('config form mounted!');
-    console.log(isLoading);
 
     axios.get('/api/rulesconfig', {
       params: { DepartmentID: department },
       cancelToken: signal.token,
     })
       .then(response => {
-        console.log(response);
+        console.log(Boolean(response.data.CopyDeptMgrOnEmails));
         setIsLoading(false)
         setState({
           // system level admin rules
@@ -134,7 +132,6 @@ const ConfigForm = ({ department, isAdmin }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    console.log(state);
     axios({
       method: 'post',
       url: '/api/rulesconfig',

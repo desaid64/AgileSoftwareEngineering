@@ -141,16 +141,16 @@ create table IF NOT EXISTS ShiftManagerRules(
   AvailableShiftResponseDeadline int,
   TimePeriodAllowedForCallOuts int,
   ConfirmCalloutTimePeriod int,
-  ResolveNoMgrAdvertise varchar(25),
-  CopyDeptMgrOnEmails char(3),
+  ResolveNoMgrAdvertise int,
+  CopyDeptMgrOnEmails int,
   SystemEmailAddress varchar(25),
   SystemTimeZone varchar(25),
-  NotifyMgrOfShiftResults char(3),
-  ShiftManagerComunicationMethod varchar (25),
-  NotifyMgrBeforeAdvertising char(3),
+  NotifyMgrOfShiftResults int,
+  ShiftManagerComunicationMethod int,
+  NotifyMgrBeforeAdvertising int,
   MinutesToWaitForMgrToAdvertise int,
   MinutesToWaitForMgrFinalDecision int,
-  ResolveNoMgrFinalDecision varchar (25),
+  ResolveNoMgrFinalDecision int,
   constraint FK_DepartmentIDForRules foreign key (DepartmentID) references Departments(DepartmentID)
 );
 
@@ -215,9 +215,11 @@ DELIMITER
 
 
 DELIMITER $$
-CREATE PROCEDURE  getSystemSettings()
+CREATE PROCEDURE  getSystemSettings(
+	IN depID int(11)
+)
 BEGIN
-	select SystemEmailAddress, SystemTimeZone  from ShiftManagerRules;
+	select SystemEmailAddress, SystemTimeZone  from ShiftManagerRules where departmentID = depID ;
 END $$
 
 INSERT INTO Languages (`LanguageCode`, `Language_`) VALUES ('1', 'English');
@@ -236,47 +238,59 @@ Insert into departments (`DepartmentID`, `DepartmentName`) values (10007,'Human 
 Insert into departments (`DepartmentID`, `DepartmentName`) values (10008,'Security');
 Insert into departments (`DepartmentID`, `DepartmentName`) values (10009,'New Employee');
 
+Call InsertAndReturnUser('smanager','$2b$10$B8rAyL.yaq14Lpgbl1BEbe//G0auVWu7mK9H6Qts/gvGrvtTgQCJK','smanager@gmail.com','0000000000',1,'Shift','Manager',999999);
+Call InsertAndReturnUser('gmanager','$2b$10$B8rAyL.yaq14Lpgbl1BEbe//G0auVWu7mK9H6Qts/gvGrvtTgQCJK','gmanager@gmail.com','0000000001',1,'General','Manager',10000);
+Call InsertAndReturnUser('fdesk','$2b$10$B8rAyL.yaq14Lpgbl1BEbe//G0auVWu7mK9H6Qts/gvGrvtTgQCJK','fdesk@gmail.com','0000000002',1,'Front','Desk',10001);
+Call InsertAndReturnUser('hkeeping','$2b$10$B8rAyL.yaq14Lpgbl1BEbe//G0auVWu7mK9H6Qts/gvGrvtTgQCJK','hkeeping@gmail.com','0000000003',1,'House','Keeping',10002);
+Call InsertAndReturnUser('cafeteria','$2b$10$B8rAyL.yaq14Lpgbl1BEbe//G0auVWu7mK9H6Qts/gvGrvtTgQCJK','cafeteria@gmail.com','0000000004',1,'Cafe','House',10003);
+Call InsertAndReturnUser('kcook','$2b$10$B8rAyL.yaq14Lpgbl1BEbe//G0auVWu7mK9H6Qts/gvGrvtTgQCJK','kcook@gmail.com','0000000005',1,'Kitchen','Cook',10004);
+Call InsertAndReturnUser('rservice','$2b$10$B8rAyL.yaq14Lpgbl1BEbe//G0auVWu7mK9H6Qts/gvGrvtTgQCJK','rservice@gmail.com','0000000006',1,'Room','Service',10005);
+Call InsertAndReturnUser('infotech','$2b$10$B8rAyL.yaq14Lpgbl1BEbe//G0auVWu7mK9H6Qts/gvGrvtTgQCJK','infotech@gmail.com','0000000007',1,'Info','Tech',10006);
+Call InsertAndReturnUser('hresources','$2b$10$B8rAyL.yaq14Lpgbl1BEbe//G0auVWu7mK9H6Qts/gvGrvtTgQCJK','hresources@gmail.com','0000000008',1,'Human','Resources',10007);
+Call InsertAndReturnUser('security','$2b$10$B8rAyL.yaq14Lpgbl1BEbe//G0auVWu7mK9H6Qts/gvGrvtTgQCJK','security@gmail.com','0000000009',1,'Security','Deptarment',10008);
+Call InsertAndReturnUser('nemployee','$2b$10$B8rAyL.yaq14Lpgbl1BEbe//G0auVWu7mK9H6Qts/gvGrvtTgQCJK','nemployee@gmail.com','0000000010',1,'New','Employeee',10009);
+
 Insert into shiftmanagerrules (`DepartmentID`,`AvailableShiftResponseDeadline`, `TimePeriodAllowedForCallOuts`, `ConfirmCalloutTimePeriod`,
     `ResolveNoMgrAdvertise` , `CopyDeptMgrOnEmails` , `NotifyMgrOfShiftResults` , `ShiftManagerComunicationMethod` ,
 	`NotifyMgrBeforeAdvertising` , `MinutesToWaitForMgrToAdvertise` , `MinutesToWaitForMgrFinalDecision` ,
-	`ResolveNoMgrFinalDecision`) values ( 10000,60,2,30,'1','1','1','1','1',60,60,'1');
+	`ResolveNoMgrFinalDecision`,`SystemEmailAddress`, `SystemTimeZone`) values ( 10000,60,2,30,'1','1','1','1','1',60,60,'1','generalmanager@system.com','(GMT-05:00) Eastern Time');
 Insert into shiftmanagerrules (`DepartmentID`,`AvailableShiftResponseDeadline`, `TimePeriodAllowedForCallOuts`, `ConfirmCalloutTimePeriod`,
     `ResolveNoMgrAdvertise` , `CopyDeptMgrOnEmails` , `NotifyMgrOfShiftResults` , `ShiftManagerComunicationMethod` ,
 	`NotifyMgrBeforeAdvertising` , `MinutesToWaitForMgrToAdvertise` , `MinutesToWaitForMgrFinalDecision` ,
-	`ResolveNoMgrFinalDecision`) values ( 10001,60,2,30,'1','1','1','1','1',60,60,'1');
+	`ResolveNoMgrFinalDecision`,`SystemEmailAddress`, `SystemTimeZone`) values ( 10001,60,2,30,'1','1','1','1','1',60,60,'1','frontdesk@system.com','(GMT-05:00) Eastern Time');
 Insert into shiftmanagerrules (`DepartmentID`,`AvailableShiftResponseDeadline`, `TimePeriodAllowedForCallOuts`, `ConfirmCalloutTimePeriod`,
     `ResolveNoMgrAdvertise` , `CopyDeptMgrOnEmails` , `NotifyMgrOfShiftResults` , `ShiftManagerComunicationMethod` ,
 	`NotifyMgrBeforeAdvertising` , `MinutesToWaitForMgrToAdvertise` , `MinutesToWaitForMgrFinalDecision` ,
-	`ResolveNoMgrFinalDecision`) values ( 10002,60,2,30,'1','1','1','1','1',60,60,'1');
+	`ResolveNoMgrFinalDecision`,`SystemEmailAddress`, `SystemTimeZone`) values ( 10002,60,2,30,'1','1','1','1','1',60,60,'1','housekeeping@system.com','(GMT-05:00) Eastern Time');
     Insert into shiftmanagerrules (`DepartmentID`,`AvailableShiftResponseDeadline`, `TimePeriodAllowedForCallOuts`, `ConfirmCalloutTimePeriod`,
     `ResolveNoMgrAdvertise` , `CopyDeptMgrOnEmails` , `NotifyMgrOfShiftResults` , `ShiftManagerComunicationMethod` ,
 	`NotifyMgrBeforeAdvertising` , `MinutesToWaitForMgrToAdvertise` , `MinutesToWaitForMgrFinalDecision` ,
-	`ResolveNoMgrFinalDecision`) values ( 10003,60,2,30,'1','1','1','1','1',60,60,'1');
+	`ResolveNoMgrFinalDecision`,`SystemEmailAddress`, `SystemTimeZone`) values ( 10003,60,2,30,'1','1','1','1','1',60,60,'1','cafeteria@system.com','(GMT-05:00) Eastern Time');
 Insert into shiftmanagerrules (`DepartmentID`,`AvailableShiftResponseDeadline`, `TimePeriodAllowedForCallOuts`, `ConfirmCalloutTimePeriod`,
     `ResolveNoMgrAdvertise` , `CopyDeptMgrOnEmails` , `NotifyMgrOfShiftResults` , `ShiftManagerComunicationMethod` ,
 	`NotifyMgrBeforeAdvertising` , `MinutesToWaitForMgrToAdvertise` , `MinutesToWaitForMgrFinalDecision` ,
-	`ResolveNoMgrFinalDecision`) values ( 10004,60,2,30,'1','1','1','1','1',60,60,'1');
+	`ResolveNoMgrFinalDecision`,`SystemEmailAddress`, `SystemTimeZone`) values ( 10004,60,2,30,'1','1','1','1','1',60,60,'1','kitchencook@system.com','(GMT-05:00) Eastern Time');
 Insert into shiftmanagerrules (`DepartmentID`,`AvailableShiftResponseDeadline`, `TimePeriodAllowedForCallOuts`, `ConfirmCalloutTimePeriod`,
     `ResolveNoMgrAdvertise` , `CopyDeptMgrOnEmails` , `NotifyMgrOfShiftResults` , `ShiftManagerComunicationMethod` ,
 	`NotifyMgrBeforeAdvertising` , `MinutesToWaitForMgrToAdvertise` , `MinutesToWaitForMgrFinalDecision` ,
-	`ResolveNoMgrFinalDecision`) values ( 10005,60,2,30,'1','1','1','1','1',60,60,'1');
+	`ResolveNoMgrFinalDecision`,`SystemEmailAddress`, `SystemTimeZone`) values ( 10005,60,2,30,'1','1','1','1','1',60,60,'1','roomservice@system.com','(GMT-05:00) Eastern Time');
     Insert into shiftmanagerrules (`DepartmentID`,`AvailableShiftResponseDeadline`, `TimePeriodAllowedForCallOuts`, `ConfirmCalloutTimePeriod`,
     `ResolveNoMgrAdvertise` , `CopyDeptMgrOnEmails` , `NotifyMgrOfShiftResults` , `ShiftManagerComunicationMethod` ,
 	`NotifyMgrBeforeAdvertising` , `MinutesToWaitForMgrToAdvertise` , `MinutesToWaitForMgrFinalDecision` ,
-	`ResolveNoMgrFinalDecision`) values ( 10006,60,2,30,'1','1','1','1','1',60,60,'1');
+	`ResolveNoMgrFinalDecision`,`SystemEmailAddress`, `SystemTimeZone`) values ( 10006,60,2,30,'1','1','1','1','1',60,60,'1','it@system.com','(GMT-05:00) Eastern Time');
 Insert into shiftmanagerrules (`DepartmentID`,`AvailableShiftResponseDeadline`, `TimePeriodAllowedForCallOuts`, `ConfirmCalloutTimePeriod`,
     `ResolveNoMgrAdvertise` , `CopyDeptMgrOnEmails` , `NotifyMgrOfShiftResults` , `ShiftManagerComunicationMethod` ,
 	`NotifyMgrBeforeAdvertising` , `MinutesToWaitForMgrToAdvertise` , `MinutesToWaitForMgrFinalDecision` ,
-	`ResolveNoMgrFinalDecision`) values ( 10007,60,2,30,'1','1','1','1','1',60,60,'1');
+	`ResolveNoMgrFinalDecision`,`SystemEmailAddress`, `SystemTimeZone`) values ( 10007,60,2,30,'1','1','1','1','1',60,60,'1','hr@system.com','(GMT-05:00) Eastern Time');
 Insert into shiftmanagerrules (`DepartmentID`,`AvailableShiftResponseDeadline`, `TimePeriodAllowedForCallOuts`, `ConfirmCalloutTimePeriod`,
     `ResolveNoMgrAdvertise` , `CopyDeptMgrOnEmails` , `NotifyMgrOfShiftResults` , `ShiftManagerComunicationMethod` ,
 	`NotifyMgrBeforeAdvertising` , `MinutesToWaitForMgrToAdvertise` , `MinutesToWaitForMgrFinalDecision` ,
-	`ResolveNoMgrFinalDecision`) values ( 10008,60,2,30,'1','1','1','1','1',60,60,'1');
+	`ResolveNoMgrFinalDecision`,`SystemEmailAddress`, `SystemTimeZone`) values ( 10008,60,2,30,'1','1','1','1','1',60,60,'1','security@system.com','(GMT-05:00) Eastern Time');
 Insert into shiftmanagerrules (`DepartmentID`,`AvailableShiftResponseDeadline`, `TimePeriodAllowedForCallOuts`, `ConfirmCalloutTimePeriod`,
     `ResolveNoMgrAdvertise` , `CopyDeptMgrOnEmails` , `NotifyMgrOfShiftResults` , `ShiftManagerComunicationMethod` ,
 	`NotifyMgrBeforeAdvertising` , `MinutesToWaitForMgrToAdvertise` , `MinutesToWaitForMgrFinalDecision` ,
-	`ResolveNoMgrFinalDecision`) values ( 10009,60,2,30,'0','0','0','0','0',60,60,'0');
+	`ResolveNoMgrFinalDecision`,`SystemEmailAddress`, `SystemTimeZone`) values ( 10009,60,2,30,'0','0','0','0','0',60,60,'0','new@system.com','(GMT-05:00) Eastern Time');
 Insert into shiftmanagerrules (`DepartmentID`,`AvailableShiftResponseDeadline`, `TimePeriodAllowedForCallOuts`, `ConfirmCalloutTimePeriod`,
     `ResolveNoMgrAdvertise` , `CopyDeptMgrOnEmails` , `NotifyMgrOfShiftResults` , `ShiftManagerComunicationMethod` ,
 	`NotifyMgrBeforeAdvertising` , `MinutesToWaitForMgrToAdvertise` , `MinutesToWaitForMgrFinalDecision` ,
-	`ResolveNoMgrFinalDecision`,`SystemEmailAddress`, `SystemTimeZone`) values ( 999999,60,2,30,'1','1','1','1','1',60,60,'1','system@hotel.com','(GMT-05:00) Eastern Time');
+	`ResolveNoMgrFinalDecision`,`SystemEmailAddress`, `SystemTimeZone`) values ( 999999,60,2,30,'1','1','1','1','1',60,60,'1','shiftmanager@system.com','(GMT-05:00) Eastern Time');
