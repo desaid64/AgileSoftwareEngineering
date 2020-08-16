@@ -40,7 +40,7 @@ const ConfigForm = ({ department, isAdmin }) => {
   const classes = useStyles()
   const signal = axios.CancelToken.source()
 
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading,setIsLoading]= useState(true);
   const [state, setState] = useState({
     ShiftManagerComunicationMethod: false,
     NotifyMgrBeforeAdvertising: false,
@@ -68,6 +68,7 @@ const ConfigForm = ({ department, isAdmin }) => {
       cancelToken: signal.token,
     })
       .then(response => {
+        console.log(response);
         setIsLoading(false)
         setState({
           // system level admin rules

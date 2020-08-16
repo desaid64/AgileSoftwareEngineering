@@ -10,7 +10,9 @@ router.get('/', authenticate, (req, res) => {
     `select DepartmentName from Departments where DepartmentID=${req.deptId}`
   db.query(sql, (err, results) => {
     if (err) throw err;
+    console.log(results);
     res.json(results);
+
   });
 })
 

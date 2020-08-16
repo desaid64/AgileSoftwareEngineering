@@ -151,14 +151,8 @@ create table IF NOT EXISTS ShiftManagerRules(
   MinutesToWaitForMgrToAdvertise int,
   MinutesToWaitForMgrFinalDecision int,
   ResolveNoMgrFinalDecision varchar (25),
-  constraint FK_DepartmentIDForRules foreign key (DeparmtentID) references Departments(DeparmtentID)
+  constraint FK_DepartmentIDForRules foreign key (DepartmentID) references Departments(DepartmentID)
 );
-
-use HotelManagement_Team_2;
-INSERT INTO `HotelManagement_Team_2`.`Languages` (`LanguageCode`, `Language_`) VALUES ('1', 'English');
-INSERT INTO `HotelManagement_Team_2`.`Languages` (`LanguageCode`, `Language_`) VALUES ('2', 'Spanish');
-INSERT INTO `HotelManagement_Team_2`.`Languages` (`LanguageCode`, `Language_`) VALUES ('3', 'Chinese');
-
 
 
 DELIMITER $$
@@ -204,3 +198,85 @@ BEGIN
     SELECT EmployeeId,Username,PreferredEmail,DepartmentID,isAdmin from Employees where EmployeeID = (SELECT last_insert_id());
 END $$
 DELIMITER 
+
+DELIMITER $$
+CREATE PROCEDURE  getDepartmentRules(
+    IN depID int(11)
+)
+BEGIN
+	select  
+    AvailableShiftResponseDeadline, TimePeriodAllowedForCallOuts, ConfirmCalloutTimePeriod,
+    ResolveNoMgrAdvertise , CopyDeptMgrOnEmails , NotifyMgrOfShiftResults , ShiftManagerComunicationMethod ,
+	NotifyMgrBeforeAdvertising , MinutesToWaitForMgrToAdvertise , MinutesToWaitForMgrFinalDecision ,
+	ResolveNoMgrFinalDecision
+    from ShiftManagerRules where departmentID = depID;
+END $$
+DELIMITER
+
+
+DELIMITER $$
+CREATE PROCEDURE  getSystemSettings()
+BEGIN
+	select SystemEmailAddress, SystemTimeZone  from ShiftManagerRules;
+END $$
+
+INSERT INTO Languages (`LanguageCode`, `Language_`) VALUES ('1', 'English');
+INSERT INTO Languages (`LanguageCode`, `Language_`) VALUES ('2', 'Spanish');
+INSERT INTO Languages (`LanguageCode`, `Language_`) VALUES ('3', 'Chinese');
+
+Insert into departments (`DepartmentID`, `DepartmentName`) values (999999,'Shift Manager');
+Insert into departments (`DepartmentID`, `DepartmentName`) values (10000,'General Manager');
+Insert into departments (`DepartmentID`, `DepartmentName`) values (10001,'Front Desk');
+Insert into departments (`DepartmentID`, `DepartmentName`) values (10002,'Housekeeping');
+Insert into departments (`DepartmentID`, `DepartmentName`) values (10003,'Caferteria');
+Insert into departments (`DepartmentID`, `DepartmentName`) values (10004,'Kitchen Cook');
+Insert into departments (`DepartmentID`, `DepartmentName`) values (10005,'Room Service');
+Insert into departments (`DepartmentID`, `DepartmentName`) values (10006,'Information Techonolgy');
+Insert into departments (`DepartmentID`, `DepartmentName`) values (10007,'Human Resources');
+Insert into departments (`DepartmentID`, `DepartmentName`) values (10008,'Security');
+Insert into departments (`DepartmentID`, `DepartmentName`) values (10009,'New Employee');
+
+Insert into shiftmanagerrules (`DepartmentID`,`AvailableShiftResponseDeadline`, `TimePeriodAllowedForCallOuts`, `ConfirmCalloutTimePeriod`,
+    `ResolveNoMgrAdvertise` , `CopyDeptMgrOnEmails` , `NotifyMgrOfShiftResults` , `ShiftManagerComunicationMethod` ,
+	`NotifyMgrBeforeAdvertising` , `MinutesToWaitForMgrToAdvertise` , `MinutesToWaitForMgrFinalDecision` ,
+	`ResolveNoMgrFinalDecision`) values ( 10000,60,2,30,'1','1','1','1','1',60,60,'1');
+Insert into shiftmanagerrules (`DepartmentID`,`AvailableShiftResponseDeadline`, `TimePeriodAllowedForCallOuts`, `ConfirmCalloutTimePeriod`,
+    `ResolveNoMgrAdvertise` , `CopyDeptMgrOnEmails` , `NotifyMgrOfShiftResults` , `ShiftManagerComunicationMethod` ,
+	`NotifyMgrBeforeAdvertising` , `MinutesToWaitForMgrToAdvertise` , `MinutesToWaitForMgrFinalDecision` ,
+	`ResolveNoMgrFinalDecision`) values ( 10001,60,2,30,'1','1','1','1','1',60,60,'1');
+Insert into shiftmanagerrules (`DepartmentID`,`AvailableShiftResponseDeadline`, `TimePeriodAllowedForCallOuts`, `ConfirmCalloutTimePeriod`,
+    `ResolveNoMgrAdvertise` , `CopyDeptMgrOnEmails` , `NotifyMgrOfShiftResults` , `ShiftManagerComunicationMethod` ,
+	`NotifyMgrBeforeAdvertising` , `MinutesToWaitForMgrToAdvertise` , `MinutesToWaitForMgrFinalDecision` ,
+	`ResolveNoMgrFinalDecision`) values ( 10002,60,2,30,'1','1','1','1','1',60,60,'1');
+    Insert into shiftmanagerrules (`DepartmentID`,`AvailableShiftResponseDeadline`, `TimePeriodAllowedForCallOuts`, `ConfirmCalloutTimePeriod`,
+    `ResolveNoMgrAdvertise` , `CopyDeptMgrOnEmails` , `NotifyMgrOfShiftResults` , `ShiftManagerComunicationMethod` ,
+	`NotifyMgrBeforeAdvertising` , `MinutesToWaitForMgrToAdvertise` , `MinutesToWaitForMgrFinalDecision` ,
+	`ResolveNoMgrFinalDecision`) values ( 10003,60,2,30,'1','1','1','1','1',60,60,'1');
+Insert into shiftmanagerrules (`DepartmentID`,`AvailableShiftResponseDeadline`, `TimePeriodAllowedForCallOuts`, `ConfirmCalloutTimePeriod`,
+    `ResolveNoMgrAdvertise` , `CopyDeptMgrOnEmails` , `NotifyMgrOfShiftResults` , `ShiftManagerComunicationMethod` ,
+	`NotifyMgrBeforeAdvertising` , `MinutesToWaitForMgrToAdvertise` , `MinutesToWaitForMgrFinalDecision` ,
+	`ResolveNoMgrFinalDecision`) values ( 10004,60,2,30,'1','1','1','1','1',60,60,'1');
+Insert into shiftmanagerrules (`DepartmentID`,`AvailableShiftResponseDeadline`, `TimePeriodAllowedForCallOuts`, `ConfirmCalloutTimePeriod`,
+    `ResolveNoMgrAdvertise` , `CopyDeptMgrOnEmails` , `NotifyMgrOfShiftResults` , `ShiftManagerComunicationMethod` ,
+	`NotifyMgrBeforeAdvertising` , `MinutesToWaitForMgrToAdvertise` , `MinutesToWaitForMgrFinalDecision` ,
+	`ResolveNoMgrFinalDecision`) values ( 10005,60,2,30,'1','1','1','1','1',60,60,'1');
+    Insert into shiftmanagerrules (`DepartmentID`,`AvailableShiftResponseDeadline`, `TimePeriodAllowedForCallOuts`, `ConfirmCalloutTimePeriod`,
+    `ResolveNoMgrAdvertise` , `CopyDeptMgrOnEmails` , `NotifyMgrOfShiftResults` , `ShiftManagerComunicationMethod` ,
+	`NotifyMgrBeforeAdvertising` , `MinutesToWaitForMgrToAdvertise` , `MinutesToWaitForMgrFinalDecision` ,
+	`ResolveNoMgrFinalDecision`) values ( 10006,60,2,30,'1','1','1','1','1',60,60,'1');
+Insert into shiftmanagerrules (`DepartmentID`,`AvailableShiftResponseDeadline`, `TimePeriodAllowedForCallOuts`, `ConfirmCalloutTimePeriod`,
+    `ResolveNoMgrAdvertise` , `CopyDeptMgrOnEmails` , `NotifyMgrOfShiftResults` , `ShiftManagerComunicationMethod` ,
+	`NotifyMgrBeforeAdvertising` , `MinutesToWaitForMgrToAdvertise` , `MinutesToWaitForMgrFinalDecision` ,
+	`ResolveNoMgrFinalDecision`) values ( 10007,60,2,30,'1','1','1','1','1',60,60,'1');
+Insert into shiftmanagerrules (`DepartmentID`,`AvailableShiftResponseDeadline`, `TimePeriodAllowedForCallOuts`, `ConfirmCalloutTimePeriod`,
+    `ResolveNoMgrAdvertise` , `CopyDeptMgrOnEmails` , `NotifyMgrOfShiftResults` , `ShiftManagerComunicationMethod` ,
+	`NotifyMgrBeforeAdvertising` , `MinutesToWaitForMgrToAdvertise` , `MinutesToWaitForMgrFinalDecision` ,
+	`ResolveNoMgrFinalDecision`) values ( 10008,60,2,30,'1','1','1','1','1',60,60,'1');
+Insert into shiftmanagerrules (`DepartmentID`,`AvailableShiftResponseDeadline`, `TimePeriodAllowedForCallOuts`, `ConfirmCalloutTimePeriod`,
+    `ResolveNoMgrAdvertise` , `CopyDeptMgrOnEmails` , `NotifyMgrOfShiftResults` , `ShiftManagerComunicationMethod` ,
+	`NotifyMgrBeforeAdvertising` , `MinutesToWaitForMgrToAdvertise` , `MinutesToWaitForMgrFinalDecision` ,
+	`ResolveNoMgrFinalDecision`) values ( 10009,60,2,30,'0','0','0','0','0',60,60,'0');
+Insert into shiftmanagerrules (`DepartmentID`,`AvailableShiftResponseDeadline`, `TimePeriodAllowedForCallOuts`, `ConfirmCalloutTimePeriod`,
+    `ResolveNoMgrAdvertise` , `CopyDeptMgrOnEmails` , `NotifyMgrOfShiftResults` , `ShiftManagerComunicationMethod` ,
+	`NotifyMgrBeforeAdvertising` , `MinutesToWaitForMgrToAdvertise` , `MinutesToWaitForMgrFinalDecision` ,
+	`ResolveNoMgrFinalDecision`,`SystemEmailAddress`, `SystemTimeZone`) values ( 999999,60,2,30,'1','1','1','1','1',60,60,'1','system@hotel.com','(GMT-05:00) Eastern Time');

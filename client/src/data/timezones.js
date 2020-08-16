@@ -1,4 +1,5 @@
 export default {
+    "(GMT-05:00) Eastern Time": "America/New_York",
     "(GMT-11:00) Niue": "Pacific/Niue",
     "(GMT-11:00) Pago Pago": "Pacific/Pago_Pago",
     "(GMT-10:00) Hawaii Time": "Pacific/Honolulu",
@@ -39,7 +40,6 @@ export default {
     "(GMT-05:00) Jamaica": "America/Jamaica",
     "(GMT-05:00) Lima": "America/Lima",
     "(GMT-05:00) Nassau": "America/Nassau",
-    "(GMT-05:00) Eastern Time": "America/New_York",
     "(GMT-05:00) Panama": "America/Panama",
     "(GMT-05:00) Port-au-Prince": "America/Port-au-Prince",
     "(GMT-05:00) Rio Branco": "America/Rio_Branco",

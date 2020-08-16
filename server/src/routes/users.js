@@ -52,7 +52,7 @@ router.post('/',(req,res) => {
             const password_digest = bcrypt.hashSync(password, 10);
             var sql = 'call InsertAndReturnUser(?,?,?,?,?,?,?,?)';
             //var sql = 'INSERT INTO Employees (Username,Passwd,PreferredEmail,PhoneNumber,PreferredLanguageID,FirstName,LastName,DepartmentID) VALUES (?,?,?,?,?,?,?,?)';
-            db.query(sql,[username,password_digest,email,phoneNumber,language,firstName,lastName,104120],(err, rows, fields)=>{
+            db.query(sql,[username,password_digest,email,phoneNumber,language,firstName,lastName,999999],(err, rows, fields)=>{
                 if (err) throw err;
                 console.log(rows[0])
                 const token = jwt.sign({

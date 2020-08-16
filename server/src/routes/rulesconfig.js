@@ -13,9 +13,10 @@ router.get('/', authenticate, (req, res) => {
   db.query(sql, [DepartmentID], (err, [[rules]]) => {
     if (err) return res.json(err);
     if (req.isAdmin) {
-      const sql2 = 'call getSystemSettings()'
-      db.query(sql2, (err, [[settings]]) => {
+      const sql2 = 'call getSystemSettings(?)'
+      db.query(sql2, [DepartmentID], (err, [[settings]]) => {
         if (err) return res.json(err)
+        console.log(settings)
         res.json({ ...rules, ...settings })
       })
     } else {
