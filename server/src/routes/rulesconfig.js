@@ -65,6 +65,7 @@ router.post('/', authenticate, [
   } = req.body
 
   const sql = 'call setDepartmentRules(?,?,?,?,?,?,?,?,?,?,?,?)';
+  
   db.query(sql, [
     DepartmentID,
     AvailableShiftResponseDeadline,
@@ -81,10 +82,11 @@ router.post('/', authenticate, [
   ],
     (err, [[rules]]) => {
       if (err) return res.json({ error: err.stack });
+      console.log(rules)
       if (req.isAdmin) {
-        const sql2 = 'call setSystemSettings(?,?)'
+        const sql2 = 'call setSystemSettings(?,?,?)'
         console.log(SystemEmailAddress + SystemTimeZone);
-        db.query(sql2, [SystemTimeZone, SystemEmailAddress], (err, [[settings]]) => {
+        db.query(sql2, [DepartmentID,SystemTimeZone, SystemEmailAddress], (err, [[settings]]) => {
           if (err) return res.json({ error: err.stack });
           res.json({ rules, settings })
         })
