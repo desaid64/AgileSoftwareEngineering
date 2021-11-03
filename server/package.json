@@ -32,6 +32,6 @@
     "mysql": "^2.18.1",
     "prop-types": "^15.7.2",
     "shortid": "^2.2.15",
-    "validator": "^12.2.0"
+    "validator": "^13.7.0"
   }
 }
